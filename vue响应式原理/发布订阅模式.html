@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>发布订阅模式</title>
+</head>
+<body>
+  <script>
+    // 事件触发器
+    class EventEmitter {
+      constructor() {
+        this.subs = Object.create(null);
+      }
+      $on(eventType, handler) {
+        if( this.subs[eventType] ) {
+          this.subs[eventType].push(handler)
+        }else {
+          this.subs[eventType] = [handler]
+        }
+      }
+      $emit(eventType, ...arg) {
+        if( this.subs[eventType] ) {
+          this.subs[eventType].forEach( handler => {
+            handler(...arg)
+          })
+        }
+      }
+    }
+
+    // const vm = new EventEmitter();
+  </script>
+</body>
+</html>
